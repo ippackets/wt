@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .box {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            width: 80%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .box h4 {
+            font-size: 18px;         }
+
+        .buttonSort,
+        .buttonSearch,
+        .clearButton {
+            background-color: #28a745; 
+            color: #fff;
+            border: none;
+            padding: 8px 15px; 
+            margin: 0 5px; 
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buttonSort:hover,
+        .buttonSearch:hover,
+        .clearButton:hover {
+            background-color: #218838; 
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="text-align: center; margin-bottom: 30px; margin-top: 20px">Assignment 3</h2>
+
+    <div class="container">
+
+        <div class="box">
+            <h4 class="seconetitle"> (a) searching and sorting array for integer elements using JavaScript </h4>
+            <label for="integerArray">Enter integers separated by comma: </label>
+            <input type="text" id="integerArray" class="form-control mb-2">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <button class="buttonSort" onclick="performIntegerSorting()">Sort Array</button>
+                <button class="buttonSearch" onclick="performIntegerSearching()">Search Value</button>
+                <button class="clearButton" onclick="clearIntArray()">Clear Section</button>
+            </div>
+            <div id="integerResult" class="seconeres"></div>
+        </div>
+
+        <div class="box">
+            <h4 class="sectwotitle">(b) array for named entities using JavaScript. You can make the use of bootstrap as well as jQuery. </h4>
+            <label for="entityArray">Enter named entities separated by comma: </label>
+            <input type="text" id="entityArray" class="form-control mb-2">
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <button class="buttonSearch" onclick="performEntitySearching()">Search Entity</button>
+                <button class="clearButton" onclick="clearStrArray()">Clear Section</button>
+            </div>
+            <div id="entityResult" class="sectwores"></div>
+        </div>
+    </div>
+
+    
+    <script>
+        function performIntegerSorting() {
+            const inputArray = document.getElementById('integerArray').value.split(',').map(Number);
+
+            for (let i = 0; i < inputArray.length - 1; i++) {
+                for (let j = 0; j < inputArray.length - i - 1; j++) {
+                    if (inputArray[j] > inputArray[j + 1]) {
+                        const temp = inputArray[j];
+                        inputArray[j] = inputArray[j + 1];
+                        inputArray[j + 1] = temp;
+                    }
+                }
+            }
+
+            document.getElementById('integerResult').innerHTML = `
+        <p>Sorted Array: [${inputArray.join(', ')}]</p>
+    `;
+        }
+
+        function performIntegerSearching() {
+            const inputArray = document.getElementById('integerArray').value.split(',').map(Number);
+
+            const searchValue = parseInt(prompt("Enter the integer to search:"));
+            const foundIndex = inputArray.indexOf(searchValue);
+
+            document.getElementById('integerResult').innerHTML = `
+            <p>Index of ${searchValue}: ${foundIndex !== -1 ? foundIndex : 'Not found'}</p>
+        `;
+        }
+
+        function performEntitySearching() {
+            const inputArray = document.getElementById('entityArray').value.split(',');
+
+            const searchEntity = prompt("Enter the entity to search:");
+            const foundIndex = inputArray.indexOf(searchEntity);
+
+            document.getElementById('entityResult').innerHTML = `
+            <p>Index of ${searchEntity}: ${foundIndex !== -1 ? foundIndex : 'Not found'}</p>
+        `;
+        }
+
+        function clearIntArray(){
+            document.getElementById('integerArray').value = '';
+            document.getElementById('integerResult').innerHTML = '';
+        }
+
+        function clearStrArray(){
+            document.getElementById('entityArray').value = '';
+            document.getElementById('entityResult').innerHTML = '';
+        }
+    </script>
+
+
+</body>
+
+</html>
+
